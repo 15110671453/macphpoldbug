@@ -1,0 +1,157 @@
+令人烦恼的php7.1.2源码的openssl扩展不支持mac
+
+通过brew 先安装openssl后
+
+在对安装好的php7.1.2添加扩展
+
+
+
+phpize
+后的  配置安装openssl
+macserver1:openssl admindyn$ ./configure --with-openssl=/usr/local/Cellar/openssl/1.0.2j/ --with-php-config=/usr/local/php7.1.2/bin/php-config 
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for cc... cc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether cc accepts -g... yes
+checking for cc option to accept ISO C89... none needed
+checking how to run the C preprocessor... cc -E
+checking for icc... no
+checking for suncc... no
+checking whether cc understands -c and -o together... yes
+checking for system library directory... lib
+checking if compiler supports -R... no
+checking if compiler supports -Wl,-rpath,... yes
+checking build system type... x86_64-apple-darwin16.6.0
+checking host system type... x86_64-apple-darwin16.6.0
+checking target system type... x86_64-apple-darwin16.6.0
+checking for PHP prefix... /usr/local/php7.1.2
+checking for PHP includes... -I/usr/local/php7.1.2/include/php -I/usr/local/php7.1.2/include/php/main -I/usr/local/php7.1.2/include/php/TSRM -I/usr/local/php7.1.2/include/php/Zend -I/usr/local/php7.1.2/include/php/ext -I/usr/local/php7.1.2/include/php/ext/date/lib
+checking for PHP extension directory... /usr/local/php7.1.2/lib/php/extensions/no-debug-non-zts-20160303
+checking for PHP installed headers prefix... /usr/local/php7.1.2/include/php
+checking if debug is enabled... no
+checking if zts is enabled... no
+checking for re2c... re2c
+checking for re2c version... 0.15.3 (ok)
+checking for gawk... no
+checking for nawk... no
+checking for awk... awk
+checking if awk is broken... no
+checking for OpenSSL support... yes, shared
+checking for Kerberos support... no
+checking whether to use system default cipher list instead of hardcoded value... no
+checking for RAND_egd... no
+checking for pkg-config... /usr/local/bin/pkg-config
+checking for OpenSSL version... >= 1.0.1
+checking for CRYPTO_free in -lcrypto... yes
+checking for SSL_CTX_set_ssl_version in -lssl... yes
+checking for ld used by cc... /Applications/Xcode8.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld
+checking if the linker (/Applications/Xcode8.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld) is GNU ld... no
+checking for /Applications/Xcode8.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld option to reload object files... -r
+checking for BSD-compatible nm... /usr/bin/nm -B
+checking whether ln -s works... yes
+checking how to recognize dependent libraries... pass_all
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking dlfcn.h usability... yes
+checking dlfcn.h presence... yes
+checking for dlfcn.h... yes
+checking the maximum length of command line arguments... 196608
+checking command to parse /usr/bin/nm -B output from cc object... ok
+checking for objdir... .libs
+checking for ar... ar
+checking for ranlib... ranlib
+checking for strip... strip
+checking for dsymutil... dsymutil
+checking for nmedit... nmedit
+checking for -single_module linker flag... yes
+checking for -exported_symbols_list linker flag... yes
+checking if cc supports -fno-rtti -fno-exceptions... yes
+checking for cc option to produce PIC... -fno-common
+checking if cc PIC flag -fno-common works... yes
+checking if cc static flag -static works... no
+checking if cc supports -c -o file.o... yes
+checking whether the cc linker (/Applications/Xcode8.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld) supports shared libraries... yes
+checking dynamic linker characteristics... darwin16.6.0 dyld
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... no
+
+creating libtool
+appending configuration tag "CXX" to libtool
+configure: creating ./config.status
+config.status: creating config.h
+macserver1:openssl admindyn$ make 
+/bin/sh /usr/local/php7.1.2/include/php/ext/openssl/libtool --mode=compile cc  -I. -I/usr/local/php7.1.2/include/php/ext/openssl -DPHP_ATOM_INC -I/usr/local/php7.1.2/include/php/ext/openssl/include -I/usr/local/php7.1.2/include/php/ext/openssl/main -I/usr/local/php7.1.2/include/php/ext/openssl -I/usr/local/php7.1.2/include/php -I/usr/local/php7.1.2/include/php/main -I/usr/local/php7.1.2/include/php/TSRM -I/usr/local/php7.1.2/include/php/Zend -I/usr/local/php7.1.2/include/php/ext -I/usr/local/php7.1.2/include/php/ext/date/lib -I/usr/local/Cellar/openssl/1.0.2j//include  -DHAVE_CONFIG_H  -g -O2   -c /usr/local/php7.1.2/include/php/ext/openssl/openssl.c -o openssl.lo 
+mkdir .libs
+ cc -I. -I/usr/local/php7.1.2/include/php/ext/openssl -DPHP_ATOM_INC -I/usr/local/php7.1.2/include/php/ext/openssl/include -I/usr/local/php7.1.2/include/php/ext/openssl/main -I/usr/local/php7.1.2/include/php/ext/openssl -I/usr/local/php7.1.2/include/php -I/usr/local/php7.1.2/include/php/main -I/usr/local/php7.1.2/include/php/TSRM -I/usr/local/php7.1.2/include/php/Zend -I/usr/local/php7.1.2/include/php/ext -I/usr/local/php7.1.2/include/php/ext/date/lib -I/usr/local/Cellar/openssl/1.0.2j//include -DHAVE_CONFIG_H -g -O2 -c /usr/local/php7.1.2/include/php/ext/openssl/openssl.c  -fno-common -DPIC -o .libs/openssl.o
+/bin/sh /usr/local/php7.1.2/include/php/ext/openssl/libtool --mode=compile cc  -I. -I/usr/local/php7.1.2/include/php/ext/openssl -DPHP_ATOM_INC -I/usr/local/php7.1.2/include/php/ext/openssl/include -I/usr/local/php7.1.2/include/php/ext/openssl/main -I/usr/local/php7.1.2/include/php/ext/openssl -I/usr/local/php7.1.2/include/php -I/usr/local/php7.1.2/include/php/main -I/usr/local/php7.1.2/include/php/TSRM -I/usr/local/php7.1.2/include/php/Zend -I/usr/local/php7.1.2/include/php/ext -I/usr/local/php7.1.2/include/php/ext/date/lib -I/usr/local/Cellar/openssl/1.0.2j//include  -DHAVE_CONFIG_H  -g -O2   -c /usr/local/php7.1.2/include/php/ext/openssl/xp_ssl.c -o xp_ssl.lo 
+ cc -I. -I/usr/local/php7.1.2/include/php/ext/openssl -DPHP_ATOM_INC -I/usr/local/php7.1.2/include/php/ext/openssl/include -I/usr/local/php7.1.2/include/php/ext/openssl/main -I/usr/local/php7.1.2/include/php/ext/openssl -I/usr/local/php7.1.2/include/php -I/usr/local/php7.1.2/include/php/main -I/usr/local/php7.1.2/include/php/TSRM -I/usr/local/php7.1.2/include/php/Zend -I/usr/local/php7.1.2/include/php/ext -I/usr/local/php7.1.2/include/php/ext/date/lib -I/usr/local/Cellar/openssl/1.0.2j//include -DHAVE_CONFIG_H -g -O2 -c /usr/local/php7.1.2/include/php/ext/openssl/xp_ssl.c  -fno-common -DPIC -o .libs/xp_ssl.o
+/bin/sh /usr/local/php7.1.2/include/php/ext/openssl/libtool --mode=link cc -DPHP_ATOM_INC -I/usr/local/php7.1.2/include/php/ext/openssl/include -I/usr/local/php7.1.2/include/php/ext/openssl/main -I/usr/local/php7.1.2/include/php/ext/openssl -I/usr/local/php7.1.2/include/php -I/usr/local/php7.1.2/include/php/main -I/usr/local/php7.1.2/include/php/TSRM -I/usr/local/php7.1.2/include/php/Zend -I/usr/local/php7.1.2/include/php/ext -I/usr/local/php7.1.2/include/php/ext/date/lib -I/usr/local/Cellar/openssl/1.0.2j//include  -DHAVE_CONFIG_H  -g -O2   -o openssl.la -export-dynamic -avoid-version -prefer-pic -module -rpath /usr/local/php7.1.2/include/php/ext/openssl/modules  openssl.lo xp_ssl.lo -Wl,-rpath,/usr/local/Cellar/openssl/1.0.2j//lib -L/usr/local/Cellar/openssl/1.0.2j//lib -lcrypto -lssl -lcrypto
+cc ${wl}-flat_namespace ${wl}-undefined ${wl}suppress -o .libs/openssl.so -bundle  .libs/openssl.o .libs/xp_ssl.o  -L/usr/local/Cellar/openssl/1.0.2j//lib -lssl -lcrypto  -Wl,-rpath -Wl,/usr/local/Cellar/openssl/1.0.2j//lib
+dsymutil .libs/openssl.so || :
+creating openssl.la
+(cd .libs && rm -f openssl.la && ln -s ../openssl.la openssl.la)
+/bin/sh /usr/local/php7.1.2/include/php/ext/openssl/libtool --mode=install cp ./openssl.la /usr/local/php7.1.2/include/php/ext/openssl/modules
+cp ./.libs/openssl.so /usr/local/php7.1.2/include/php/ext/openssl/modules/openssl.so
+cp ./.libs/openssl.lai /usr/local/php7.1.2/include/php/ext/openssl/modules/openssl.la
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/local/php7.1.2/include/php/ext/openssl/modules
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the `-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the `DYLD_LIBRARY_PATH' environment variable
+     during execution
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+
+Build complete.
+Don't forget to run 'make test'.
+
+最后的make install
+macserver1:openssl admindyn$ make install
+Installing shared extensions:     /usr/local/php7.1.2/lib/php/extensions/no-debug-non-zts-20160303/
+cp: /usr/local/php7.1.2/lib/php/extensions/no-debug-non-zts-20160303/#INST@12925#: Permission denied
+make: *** [install-modules] Error 1
+macserver1:openssl admindyn$ sudo make install
+Password:
+/bin/sh /usr/local/php7.1.2/include/php/ext/openssl/libtool --mode=install cp ./openssl.la /usr/local/php7.1.2/include/php/ext/openssl/modules
+cp ./.libs/openssl.so /usr/local/php7.1.2/include/php/ext/openssl/modules/openssl.so
+cp ./.libs/openssl.lai /usr/local/php7.1.2/include/php/ext/openssl/modules/openssl.la
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/local/php7.1.2/include/php/ext/openssl/modules
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the `-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the `DYLD_LIBRARY_PATH' environment variable
+     during execution
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+Installing shared extensions:     /usr/local/php7.1.2/lib/php/extensions/no-debug-non-zts-20160303/
+macserver1:openssl admindyn$ 
